@@ -1,0 +1,9 @@
+---
+- hosts: all
+  connection: ssh
+  become: yes
+  become_method: sudo
+  roles:
+    - wget
+    - elinks
+    - ftp

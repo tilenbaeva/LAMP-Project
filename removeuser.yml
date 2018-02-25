@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Add user to a system
+      user:
+        name: aiza
+        state: absent
+        remove: yes
+
+
+    - name: Remove another user
+      user:
+        name: andrew
+        state: absent
+        remove: yes

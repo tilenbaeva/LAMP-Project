@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Creates a multiple folders inside folder
+      file: 
+        path: /tmp/world/us/illinois/chicago/western
+        recurse: yes
+        

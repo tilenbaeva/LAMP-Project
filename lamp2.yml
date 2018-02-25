@@ -1,0 +1,60 @@
+--- #This playbook installs LAMP on CentOS7 and add users
+- hosts: all  
+  become: yes
+  become_method: sudo 
+  connection: ssh
+  tasks: 
+    - name: Add 2 users
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items: 
+        - Bryan
+        - Sam
+
+    - name: Install Apache web server
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      yum: 
+        name: httpd        
+        state: installed
+
+    - name: Start the server
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Install MySQL database server
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      yum:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+      - mariadb-server
+      - mariadb
+     # - python-mariadb
+
+    - name: Start the server
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Install PHP
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      yum:
+        name: "{{ item }}" 
+        state: installed
+      with_items:
+      - php
+      - php-mysql
+
+    - name: Start the server
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      service:
+        name: httpd
+        state: started
+        enabled: yes

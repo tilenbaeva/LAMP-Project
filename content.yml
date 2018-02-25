@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Add s content to a file
+      copy:
+        content: "This is a content of the file" 
+        dest: /tmp/file_with_content
+        group: ansible
+        owner: ansible

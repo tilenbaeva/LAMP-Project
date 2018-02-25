@@ -1,0 +1,27 @@
+--- #This playbook updates  CentOS6 and reboot.
+- hosts: all 
+  become: yes
+  become_method: sudo 
+  connection: ssh
+  tasks: 
+    - name: Add user to all hosts
+      user:
+        name: bob
+        state: present
+
+    - name: Install wget package
+      when: ansible_os_family == "Debian" 
+      apt: 
+        name: wget
+        state: present
+    
+
+    - name: Update CentOS6
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+      yum:
+        name: kernel
+        state: latest
+
+    - name: Reboot CentOS6
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+      command: "reboot"

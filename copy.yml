@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Copying test file to remote system
+      copy: 
+        src: /etc/passwd
+        dest: /tmp/list_of_users
+        remote_src: yes 

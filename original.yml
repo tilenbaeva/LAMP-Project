@@ -1,0 +1,7 @@
+---   #This is Aiza's class playbook
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: 

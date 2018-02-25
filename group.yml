@@ -1,0 +1,11 @@
+---   #This is Aiza's class playbook
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Add a group
+      group:
+        name: billing
+        state: present
+        gid: 1101

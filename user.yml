@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Add user to a system
+      user:
+        name: jimmy
+        state: present
+        uid: 1010

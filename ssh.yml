@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Add User with ssh-key
+      user:
+        name: aiza
+        comment: "this user has ssh"
+        shell: /bin/csh
+        generate_ssh_key: yes
+        state: present

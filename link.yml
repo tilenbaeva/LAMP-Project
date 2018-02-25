@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Creates a link
+      file: 
+        src: /etc/passwd
+        dest: /tmp/passwd
+        state: link

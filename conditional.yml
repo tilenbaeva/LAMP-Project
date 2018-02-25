@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks: 
+    - name: Install conditionally
+      when: ansible_os_family == "Redhat"
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install on Ubuntu
+      when: ansible_os_family == "Debian"
+      package:
+        name: ftp
+        state: installed
+        
+    - name: Remove bob user on CentOS 7
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+      user:
+        name: bob
+        state: absent

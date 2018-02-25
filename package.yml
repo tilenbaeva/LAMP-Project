@@ -1,0 +1,10 @@
+--- 
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Install packages
+      package:
+        name: vsftpd
+

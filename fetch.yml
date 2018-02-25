@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Download message file
+      fetch:
+        src: /var/log/messages
+        dats: /tmp/
+        flat: yes
+

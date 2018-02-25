@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Add a file
+      file:
+        path: /tmp/file
+        state: touch
+
+
+
+    - name: Add a user to a system
+      user:
+        name: andrew
+        uid: 1100
+        shell: /bin/false
+        comment: "This is a developer"
+        groups: ansible,wheel
+        state: present
+
+
+
+    - name: Add a directoty
+      file:
+        path: /tmp/folder101
+        state: directory
+        owner: root
+        group: root
+        attributes: "a"
